@@ -1,33 +1,64 @@
+import { useEffect, useState } from "react";
 import PropType from "prop-types";
+import { Skeleton } from "@mui/material";
 
 import { Button, Input } from "@/components";
-import memeing from "@/assets/memeing.png";
 
 import "./index.css";
 
 export function Main(props) {
+  const [top, setTop] = useState("");
+  const [bottom, setBottom] = useState("");
+  const [memes, setMemes] = useState([]);
+  const [currentMeme, setCurrentMeme] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    getRandomMeme();
+
+    function getRandomMeme() {
+      const randIdx = Math.floor(Math.random() * 100);
+      setCurrentMeme(() => memes[randIdx]);
+    }
+  }, [memes]);
+
+  async function handleSubmit(event) {
+    event.preventDefault();
+    await getMemes();
+  }
+
+  async function getMemes() {
+    setIsLoading(true);
+    const response = await fetch("https://api.imgflip.com/get_memes");
+    const data = await response.json();
+    setMemes(() => data.data.memes);
+    setIsLoading(false);
+  }
+
   return (
     <main
       className={
         "flex flex-col max-w-[550px] px-[36px]" + " " + props.className
       }
     >
-      <div className="flex gap-[17px] mx-auto">
-        <Input />
-        <Input />
-      </div>
-      <Button className="mt-[15px]">Get a new meme image 🖼️</Button>
+      <form onSubmit={handleSubmit}>
+        <div className="flex gap-[17px] mx-auto">
+          <Input value={top} onChange={(e) => setTop(e.target.value)} />
+          <Input value={bottom} onChange={(e) => setBottom(e.target.value)} />
+        </div>
+        <Button type="submit" className="mt-[15px] w-full">
+          Get a new meme image 🖼️
+        </Button>
+      </form>
       <div className="relative mt-[36px]">
-        <img
-          className="max-w-[477px] mx-auto rounded-[5px]"
-          src={memeing}
-          alt="An image of a meme"
-        />
-        <span className="text-white absolute top-0 left-0 mt-[16px] ml-[177px] font-black text-[32px] leading-[39.03px] | text-shadow">
-          SHUT UP
+        {currentMeme && !isLoading && (
+          <img className="mx-auto" src={currentMeme.url} alt="Meme" />
+        )}
+        <span className="w-full text-center text-white absolute top-0 left-0 mt-[16px] font-black text-[32px] leading-[39.03px] | text-shadow">
+          {top}
         </span>
-        <span className="text-white absolute bottom-0 left-0 mb-[16px] ml-[103px] font-black text-[32px] leading-[39.03px] | text-shadow">
-          AND TAKE MY MONEY
+        <span className="w-full text-center text-white absolute bottom-0 left-0 mb-[16px] font-black text-[32px] leading-[39.03px] | text-shadow">
+          {bottom}
         </span>
       </div>
     </main>
