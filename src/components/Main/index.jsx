@@ -1,9 +1,9 @@
-import { Input } from "@/components";
+import { Button } from "@/components";
 
 export function Main() {
   return (
     <main>
-      <Input />
+      <Button>Hello World</Button>
     </main>
   );
 }

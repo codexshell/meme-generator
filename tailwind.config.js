@@ -4,8 +4,10 @@ export default {
   theme: {
     extend: {
       colors: {
-        "purple-jam": "#672280",
-        "dark-orchid": "#A626D3",
+        purple1: "#672280",
+        purple2: "#A626D3",
+        purple3: "#711F8D",
+        purple4: "#A818DA",
         iron: "#D5D4D8",
         woodsmoke: "#0D0D0D",
       },
