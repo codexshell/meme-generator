@@ -7,7 +7,11 @@ import "./index.css";
 
 export function Main(props) {
   return (
-    <main className={"flex flex-col max-w-[550px]" + " " + props.className}>
+    <main
+      className={
+        "flex flex-col max-w-[550px] px-[36px]" + " " + props.className
+      }
+    >
       <div className="flex gap-[17px] mx-auto">
         <Input />
         <Input />
