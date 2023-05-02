@@ -1,11 +1,9 @@
-import "./index.css";
+import { Header } from "@/components";
 
-function App() {
+export function App() {
   return (
     <>
-      <h1>Hello World</h1>
+      <Header />
     </>
   );
 }
-
-export default App;
