@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import PropType from "prop-types";
-import { Skeleton } from "@mui/material";
 
 import { Button, Input } from "@/components";
 
@@ -14,17 +13,17 @@ export function Main(props) {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    getRandomMeme();
+    getMemes();
+  }, []);
 
-    function getRandomMeme() {
-      const randIdx = Math.floor(Math.random() * 100);
-      setCurrentMeme(() => memes[randIdx]);
-    }
-  }, [memes]);
+  function getRandomMeme() {
+    const randIdx = Math.floor(Math.random() * memes.length);
+    setCurrentMeme(() => memes[randIdx]);
+  }
 
-  async function handleSubmit(event) {
+  function handleSubmit(event) {
     event.preventDefault();
-    await getMemes();
+    getRandomMeme();
   }
 
   async function getMemes() {
