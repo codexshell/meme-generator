@@ -42,8 +42,8 @@ export function Main(props) {
     >
       <form onSubmit={handleSubmit}>
         <div className="flex gap-[17px] mx-auto">
-          <Input value={top} onChange={(e) => setTop(e.target.value)} />
-          <Input value={bottom} onChange={(e) => setBottom(e.target.value)} />
+          <Input value={top} placeholder='Top text' onChange={(e) => setTop(e.target.value)} />
+          <Input value={bottom} placeholder='Bottom text' onChange={(e) => setBottom(e.target.value)} />
         </div>
         <Button type="submit" className="mt-[15px] w-full">
           Get a new meme image 🖼️
@@ -53,10 +53,10 @@ export function Main(props) {
         {currentMeme && !isLoading && (
           <img className="mx-auto" src={currentMeme.url} alt="Meme" />
         )}
-        <span className="w-full text-center text-white absolute top-0 left-0 mt-[16px] font-black text-[32px] leading-[39.03px] | text-shadow">
+        <span className="text-center text-white absolute top-0 left-0 right-0 mt-[16px] font-black text-[32px] leading-[39.03px] | text-shadow">
           {top}
         </span>
-        <span className="w-full text-center text-white absolute bottom-0 left-0 mb-[16px] font-black text-[32px] leading-[39.03px] | text-shadow">
+        <span className="text-center text-white absolute bottom-0 left-0 right-0 mb-[16px] font-black text-[32px] leading-[39.03px] | text-shadow">
           {bottom}
         </span>
       </div>
